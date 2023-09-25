@@ -1,10 +1,15 @@
 import { useState } from "react";
 import "./App.css";
-import Card from "./components/Card/Card";
+import Card from "./components/ProductGrid/Card";
 import Header from "./components/Header/Header";
 import ProductForm from "./components/Header/ProductForm";
+import ProductGrid from "./components/ProductGrid/ProductGrid";
+import sampleProducts from "./sample.json";
 
 function App() {
+  // reading products from mongodb
+  const [products] = useState(sampleProducts);
+
   const [isProductFormOpen, setIsProductFormOpen] = useState(false);
 
   const openProductForm = () => {
@@ -17,7 +22,7 @@ function App() {
 
   const submitProductForm = (productDescription) => {
     console.log();
-    // Send the productDescription to your backend API here
+    // sending data to mongo db
     console.log("Creating product with description:", productDescription);
   };
 
@@ -27,7 +32,7 @@ function App() {
       {isProductFormOpen && (
         <ProductForm onClose={closeProductForm} onSubmit={submitProductForm} />
       )}
-      <Card />
+      <ProductGrid products={products} />
     </div>
   );
 }
