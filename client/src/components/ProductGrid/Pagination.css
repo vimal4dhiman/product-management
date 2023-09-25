@@ -1,4 +1,4 @@
-/* Pagination.css */
+/* Pagination.css (Updated CSS for Horizontal Pagination) */
 .pagination {
   display: flex;
   justify-content: center;
@@ -6,17 +6,17 @@
   margin-top: 20px;
 }
 
-.pagination ul {
+.page-numbers {
   list-style: none;
   display: flex;
   padding: 0;
 }
 
-.pagination li {
+.page-numbers li {
   margin: 0 5px;
 }
 
-.pagination button {
+.page-numbers button {
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -26,10 +26,10 @@
   font-size: 1rem;
 }
 
-.pagination button.active {
+.page-numbers button.active {
   background-color: #0056b3;
 }
 
-.pagination button:hover {
+.page-numbers button:hover {
   background-color: #0056b3;
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import "./Pagination.css"; // Import the CSS file for styling
 
 function Pagination({ productsPerPage, totalProducts, currentPage, paginate }) {
   const pageNumbers = [];
@@ -9,7 +10,7 @@ function Pagination({ productsPerPage, totalProducts, currentPage, paginate }) {
 
   return (
     <div className="pagination">
-      <ul>
+      <ul className="page-numbers">
         {pageNumbers.map((number) => (
           <li key={number}>
             <button
