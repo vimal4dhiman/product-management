@@ -1,10 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductList from "./ProductList";
 import Pagination from "./Pagination";
+import URL from "../../constants";
 
-function ProductGrid({ products }) {
+const ProductGrid = ({ products, setProducts }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(6);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(URL + "/api/products");
+
+        if (response.ok) {
+          const data = await response.json();
+          setProducts(data);
+        } else {
+          throw new Error("Failed to fetch products");
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -17,17 +37,9 @@ function ProductGrid({ products }) {
     setCurrentPage(pageNumber);
   };
 
-  const handleDelete = (productToDelete) => {
-    // Implement your logic to delete the product here
-    // For example, you can filter the products array to remove the product
-    // Update the state or make an API request to delete the product from the server
-    // For this example, we'll just log the product being deleted
-    console.log("Product deleted:", productToDelete);
-  };
-
   return (
     <div className="product-grid">
-      <ProductList products={currentProducts} onDelete={handleDelete} />
+      <ProductList products={currentProducts} setProducts={setProducts} />
       <Pagination
         productsPerPage={productsPerPage}
         totalProducts={products.length}
@@ -35,6 +47,6 @@ function ProductGrid({ products }) {
       />
     </div>
   );
-}
+};
 
 export default ProductGrid;

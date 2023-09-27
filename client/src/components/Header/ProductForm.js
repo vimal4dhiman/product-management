@@ -1,9 +1,8 @@
-// ProductForm.js
 import React, { useState } from "react";
-import "./ProductForm.css"; // Import the CSS file for styling
+import "./ProductForm.css";
 import URL from "../../constants";
 
-function ProductForm({ onClose }) {
+const ProductForm = ({ onClose, products }) => {
   const [productData, setProductData] = useState({
     title: "",
     description: "",
@@ -20,8 +19,28 @@ function ProductForm({ onClose }) {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const updateExistingProduct = async () => {
+    try {
+      const response = await fetch(URL + `/api/products/${productData.title}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(productData),
+      });
+      console.log(response);
+      if (response.ok) {
+        const updatedProduct = await response.json();
+        console.log("Product updated:", updatedProduct);
+      } else {
+        throw new Error("Failed to update product");
+      }
+    } catch (error) {
+      console.error("Error updating product:", error);
+    }
+  };
+
+  const createNewProduct = async () => {
     try {
       const response = await fetch(URL + "/api/products", {
         method: "POST",
@@ -34,13 +53,21 @@ function ProductForm({ onClose }) {
       if (response.ok) {
         const product = await response.json();
         alert("Product created");
-        console.log("Product created:", product);
       } else {
         alert("Failed To create the product ");
         throw new Error("Failed to create product");
       }
     } catch (error) {
       console.error("Error creating product:", error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (products.find((ele) => ele.title === productData.title)) {
+      await updateExistingProduct();
+    } else {
+      await createNewProduct();
     }
     onClose();
   };
@@ -49,6 +76,7 @@ function ProductForm({ onClose }) {
     <div className="product-form-overlay">
       <div className="product-form">
         <h2>Create Product</h2>
+        <h4>To edit an existing product, enter it's title</h4>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="title">Product Title/Name:</label>
@@ -118,6 +146,6 @@ function ProductForm({ onClose }) {
       </div>
     </div>
   );
-}
+};
 
 export default ProductForm;

@@ -1,4 +1,3 @@
-/* ProdescriptionuctForm.css */
 .product-form-overlay {
   position: fixed;
   top: 0;
@@ -9,7 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999; /* Increase z-index to make the overlay appear above other content */
+  z-index: 999;
 }
 
 .product-form {
@@ -17,11 +16,11 @@
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
-  max-width: 600px; /* Increase the max-width for a wider horizontal form */
+  max-width: 600px;
   width: 100%;
   text-align: left;
-  position: relative; /* Add position relative to create stacking context */
-  z-index: 1000; /* Increase z-index to make the form appear above the overlay */
+  position: relative;
+  z-index: 1000;
 }
 
 .product-form h2 {
@@ -32,13 +31,13 @@
 
 .form-group {
   display: flex;
-  flex-wrap: wrap; /* Allow form elements to wrap to the next line if needed */
-  justify-content: space-between; /* Create a horizontal layout */
-  margin-bottom: 20px; /* Increased margin for spacing between form groups */
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .form-group label {
-  flex-basis: 30%; /* Adjust the label width */
+  flex-basis: 30%;
   margin-bottom: 5px;
   font-weight: bold;
 }
@@ -47,17 +46,17 @@
 .form-group input[type="number"],
 .form-group input[type="url"],
 .form-group textarea {
-  flex-basis: 65%; /* Adjust the input width */
+  flex-basis: 65%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
-  margin-bottom: 10px; /* Added margin for spacing between form elements */
+  margin-bottom: 10px;
 }
 
 .form-actions {
   display: flex;
-  justify-content: flex-end; /* Right-align the buttons */
+  justify-content: flex-end;
   margin-top: 20px;
 }
 

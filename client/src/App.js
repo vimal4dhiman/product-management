@@ -3,13 +3,10 @@ import "./App.css";
 import Header from "./components/Header/Header";
 import ProductForm from "./components/Header/ProductForm";
 import ProductGrid from "./components/ProductGrid/ProductGrid";
-import sampleProducts from "./sample.json";
 
-function App() {
-  // reading products from mongodb
-  const [products] = useState(sampleProducts);
-
+const App = () => {
   const [isProductFormOpen, setIsProductFormOpen] = useState(false);
+  const [products, setProducts] = useState([]);
 
   const openProductForm = () => {
     setIsProductFormOpen(true);
@@ -22,10 +19,12 @@ function App() {
   return (
     <div className="App">
       <Header onCreateProduct={openProductForm} />
-      {isProductFormOpen && <ProductForm onClose={closeProductForm} />}
-      <ProductGrid products={products} />
+      {isProductFormOpen && (
+        <ProductForm onClose={closeProductForm} products={products} />
+      )}
+      <ProductGrid products={products} setProducts={setProducts} />
     </div>
   );
-}
+};
 
 export default App;

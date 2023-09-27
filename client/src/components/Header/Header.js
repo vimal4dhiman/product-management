@@ -6,7 +6,7 @@ const Header = ({ onCreateProduct }) => {
     <header className="app-header">
       <h1>Product Management</h1>
       <button className="create-product-button" onClick={onCreateProduct}>
-        Create Product
+        Create/Edit Product
       </button>
     </header>
   );
