@@ -1,15 +1,15 @@
 // ProductForm.js
 import React, { useState } from "react";
 import "./ProductForm.css"; // Import the CSS file for styling
+import URL from "../../constants";
 
-function ProductForm({ onClose, onSubmit }) {
+function ProductForm({ onClose }) {
   const [productData, setProductData] = useState({
     title: "",
     description: "",
     price: "",
     rating: "",
     brand: "",
-    image: "",
   });
 
   const handleChange = (e) => {
@@ -20,10 +20,28 @@ function ProductForm({ onClose, onSubmit }) {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Validate and submit the form data to the backend API
-    onSubmit(productData);
+    try {
+      const response = await fetch(URL + "/api/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(productData),
+      });
+
+      if (response.ok) {
+        const product = await response.json();
+        alert("Product created");
+        console.log("Product created:", product);
+      } else {
+        alert("Failed To create the product ");
+        throw new Error("Failed to create product");
+      }
+    } catch (error) {
+      console.error("Error creating product:", error);
+    }
     onClose();
   };
 
