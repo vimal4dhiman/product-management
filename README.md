@@ -1,5 +1,7 @@
 # Product Management MERN stack Application
 
+![Product management Application](image.png)
+
 ## Getting Started
 
 These instructions will help you set up and run the project on your local machine.
